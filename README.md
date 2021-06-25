@@ -4,6 +4,8 @@
 
 This ansible role install Consul and expect you to **supply your own configuration templates**.
 
+Consul has MANY configuration parameters and trying to cover all of them with ansible variables makes things awfully complicated, hard to maintain and frustrating when some options are not handled. You might also prefer to use HCL over the JSON format... For these reasons, this role handles the installation of consul and use your supplied configuration templates so that everyone's life is made easier!
+
 See: 
 - [`consul_config_template`](#consul_config_template)
 - [`consul_extra_config_templates`](#consul_extra_config_templates)
@@ -20,7 +22,7 @@ See:
 
 ### `consul_config_template`
 - Path to the configuration template to use
-  - Must be overridden to yours
+  - Must be overridden by yours
   - Resulting config will be the file name without the `.j2` extension. ie. `etc/consul/config.hcl.j2` would result in `{{ consul_config_dir }}/config.hcl`
 - Default value: `etc/consul/config.hcl.j2`
 
