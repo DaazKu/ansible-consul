@@ -1,0 +1,11 @@
+- name: Installing HashiCorp Consul
+  unarchive:
+    remote_src: true
+    src: "https://releases.hashicorp.com/consul/{{ consul_version|string }}/consul_{{ consul_version|string }}_linux_amd64.zip"
+    dest: "{{ consul_bin_dir }}/"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: 0770
+  become: true
+  notify:
+    - restart consul

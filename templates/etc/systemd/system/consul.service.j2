@@ -1,0 +1,35 @@
+### BEGIN INIT INFO
+# Provides:          consul
+# Required-Start:    $local_fs $remote_fs
+# Required-Stop:     $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Consul agent
+# Description:       Consul service discovery framework
+### END INIT INFO
+
+# https://learn.hashicorp.com/tutorials/vault/ha-with-consul#consul-systemd-unit-file
+
+[Unit]
+Description=Consul agent
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User={{ consul_user }}
+Group={{ consul_group }}
+PIDFile={{ consul_run_path }}/consul.pid
+ExecStartPre=+/bin/mkdir -m 0750 -p {{ consul_run_path }}
+ExecStartPre=+/bin/chown -R {{ consul_user }}:{{ consul_group }} {{ consul_run_path }}
+ExecStart={{ consul_bin_dir }}/consul agent \
+    -config-file={{ consul_config_dir }}/{{ (consul_config_template | regex_search('(?:.+/)?(.+?)(?:\\.j2)?$', '\\1'))[0]  }} \
+    -config-dir={{ consul_extra_config_dir }} \
+    -pid-file={{ consul_run_path }}/consul.pid
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+KillSignal=SIGTERM
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target

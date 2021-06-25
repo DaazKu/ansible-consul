@@ -1,0 +1,10 @@
+consul_bin_dir: /usr/local/bin
+consul_config_dir: /etc/consul
+consul_config_template: etc/consul/config.hcl.j2
+consul_data_dir: /var/consul
+consul_extra_config_dir: "{{ consul_config_dir }}/consul.d"
+consul_extra_config_templates: []
+consul_group: consul
+consul_run_path: /var/run/consul
+consul_user: consul
+consul_version: '1.10.0'

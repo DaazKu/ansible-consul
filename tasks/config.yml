@@ -1,0 +1,49 @@
+- name: Creating consul configuration folders
+  file:
+    path: "{{ item }}"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: 0770
+    state: directory
+  become: true
+  loop:
+    - "{{ consul_config_dir }}"
+    - "{{ consul_extra_config_dir }}"
+
+- name: Creating consul data folder
+  file:
+    path: "{{ consul_data_dir }}"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: 0770
+    recurse: true
+    state: directory
+  become: true
+  tags:
+    # Stupid bug make this fail in molecule. No clue why.
+    - molecule-idempotence-notest
+
+- name: Configuring consul (main)
+  template:
+    src: "{{ consul_config_template }}"
+    dest: "{{ consul_config_dir }}/{{ (consul_config_template | regex_search('(?:.+/)?(.+?)(?:\\.j2)?$', '\\1'))[0]  }}"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: 0660
+  become: true
+  notify:
+    - restart consul
+
+- name: Configuring consul (extra)
+  template:
+    src: "{{ consul_extra_config_template }}"
+    dest: "{{ consul_extra_config_dir }}/{{ (consul_extra_config_template | regex_search('(?:.+/)?(.+?)(?:\\.j2)?$', '\\1'))[0]  }}"
+    owner: "{{ consul_user }}"
+    group: "{{ consul_group }}"
+    mode: 0660
+  become: true
+  loop: "{{ consul_extra_config_templates }}"
+  loop_control:
+    loop_var: consul_extra_config_template
+  notify:
+    - restart consul

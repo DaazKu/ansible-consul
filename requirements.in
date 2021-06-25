@@ -1,0 +1,14 @@
+ansible
+ansible-lint
+docker
+mkdocs
+molecule
+molecule-docker
+pip-tools
+yamllint
+autopep8
+flake8
+pycodestyle
+pylint
+testinfra
+tox

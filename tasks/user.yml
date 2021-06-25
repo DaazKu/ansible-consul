@@ -1,0 +1,14 @@
+- name: Creating consul group
+  group:
+    name: "{{ consul_group }}"
+    state: present
+  become: true
+
+- name: Creating consul user
+  user:
+    createhome: false
+    group: "{{ consul_group }}"
+    name: "{{ consul_user }}"
+    shell: /bin/false
+    system: true
+  become: true

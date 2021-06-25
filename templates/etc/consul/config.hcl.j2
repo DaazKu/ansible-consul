@@ -1,0 +1,9 @@
+# Very stupid config :D
+bind_addr = "0.0.0.0"
+advertise_addr = "{{ ansible_default_ipv4.address }}"
+data_dir = "{{ consul_data_dir }}"
+encrypt = "leYVf9RqBUPnNzZtgSpMdjMSVTjnAupKyN1K/UXO8zQ=" # Generate using 'consul keygen' - Needs to match servers
+node_name = "{{ ansible_hostname }}"
+server = true
+ui = false
+bootstrap = true
