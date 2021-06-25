@@ -4,15 +4,12 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
+    paths-ignore: &path_ignore
       - '.gitignore'
       - '**.md'
       - 'meta/main.yml'
   pull_request:
-    paths-ignore:
-      - '.gitignore'
-      - '**.md'
-      - 'meta/main.yml'
+    paths-ignore: *path_ignore
 
 jobs:
   build:
