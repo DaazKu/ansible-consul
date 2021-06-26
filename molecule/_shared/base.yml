@@ -31,6 +31,10 @@ provisioner:
   playbooks:
     prepare: ../_shared/prepare.yml
     converge: ../_shared/converge.yml
+  inventory:
+    group_vars:
+      consul_instances:
+        consul_config_template: molecule/_shared/config.hcl.j2
 verifier:
   name: testinfra
   directory: ../_shared/tests

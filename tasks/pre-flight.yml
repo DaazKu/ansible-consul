@@ -1,3 +1,9 @@
+- name: Ensure that consul_config_template is defined
+  assert:
+    that:
+      - consul_config_template
+    fail_msg: "'consul_config_template' must be defined"
+
 - name: Updating Apt Cache
   apt:
     update_cache: true
