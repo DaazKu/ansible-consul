@@ -1,4 +1,4 @@
-- name: Creating consul configuration folders
+- name: Creating consul configuration directories
   file:
     path: "{{ item }}"
     owner: "{{ consul_user }}"
@@ -10,7 +10,7 @@
     - "{{ consul_config_dir }}"
     - "{{ consul_extra_config_dir }}"
 
-- name: Creating consul data folder
+- name: Creating consul data directory
   file:
     path: "{{ consul_data_dir }}"
     owner: "{{ consul_user }}"
