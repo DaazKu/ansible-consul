@@ -8,13 +8,15 @@ See:
 - [`consul_config_template`](#consul_config_template)
 - [`consul_extra_config_templates`](#consul_extra_config_templates)
 
-Consul has MANY configuration parameters and trying to cover all of them with ansible variables makes things awfully complicated, hard to maintain and frustrating when some options are not handled. You might also prefer to use HCL over the JSON format... For these reasons, this role handles the installation of consul and use your supplied configuration templates so that everyone's life is made easier!
+Consul has MANY configuration parameters and trying to cover all of them with ansible variables makes things awfully complicated, 
+hard to maintain and frustrating when some options are not handled. You might also prefer to use HCL over the JSON format...
+For these reasons, this role handles the installation of consul and use your supplied configuration templates so that everyone's life is made easier!
 
 ## Role Variables
 
-### `consul_version`
-- Version to install
-- Default value: 1.10.0
+### `consul_bin_dir`
+- Consul binary directory
+- Default value: `/usr/local/bin`
 
 ### `consul_config_dir`
 - Base configuration directory
