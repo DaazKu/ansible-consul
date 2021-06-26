@@ -20,7 +20,7 @@
     state: directory
   become: true
   tags:
-    # Stupid bug make this fail in molecule. No clue why.
+    # `recurse: true` makes idempotency fail in molecule ¯\_(ツ)_/¯
     - molecule-idempotence-notest
 
 - name: Configuring consul (main)
