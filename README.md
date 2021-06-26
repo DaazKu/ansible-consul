@@ -24,9 +24,8 @@ For these reasons, this role handles the installation of consul and use your sup
 
 ### `consul_config_template`
 - Path to the configuration template to use
-  - Must be overridden by yours
-  - Resulting config will be the file name without the `.j2` extension. ie. `etc/consul/config.hcl.j2` would result in `{{ consul_config_dir }}/config.hcl`
-- Default value: `etc/consul/config.hcl.j2`
+  - **Must be supplied**
+  - Resulting config will be the file name without the `.j2` extension. ie. `/some/path/config.hcl.j2` would result in `{{ consul_config_dir }}/config.hcl`
 
 ### `consul_data_dir`
 - Consul data directory
